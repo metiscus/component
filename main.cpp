@@ -4,6 +4,7 @@
 #include "core/object.h"
 #include "components/living.h"
 #include "components/damagereductioneffect.h"
+#include "components/healingeffect.h"
 
 int main(int argc, char** argv)
 {
@@ -18,6 +19,20 @@ int main(int argc, char** argv)
         std::unique_ptr<Component> component;
         component.reset(new LivingComponent(myObject.get()));
         myObject->AddComponent(component);
+        
+        std::unique_ptr<Component> component2;
+        component2.reset(new HealingEffect(myObject.get()));
+        
+        Event buffness("set_property");
+        buffness.SetValueString("property", "duration");
+        buffness.SetValueString("value", "5");
+        component2->HandleEvent(buffness);
+        
+        buffness.SetValueString("property", "quantity");
+        buffness.SetValueString("value", "20");
+        component2->HandleEvent(buffness);
+        
+        myObject->AddComponent(component2);
 
         objects.emplace_back(std::move(myObject));
     }
@@ -33,15 +48,18 @@ int main(int argc, char** argv)
 
         std::unique_ptr<Component> component2;
         component2.reset(new DamageReductionEffect(myObject.get()));
-        myObject->AddComponent(component2);
-        
+
         Event buffness("set_property");
         buffness.SetValueString("property", "max_health");
         buffness.SetValueString("value", "150");
-        myObject->HandleEvent(buffness);
+        component2->HandleEvent(buffness);
         
         buffness.SetValueString("property", "health");
         buffness.SetValueString("value", "150");
+        component2->HandleEvent(buffness);
+
+        myObject->AddComponent(component2);
+
 
         objects.emplace_back(std::move(myObject));
     }
@@ -55,15 +73,17 @@ int main(int argc, char** argv)
 
     Event startFrame("event_start_frame");
     
-    for(uint32_t ii=0; ii<10; ++ii)
+    for(uint32_t ii=0; ii<20; ++ii)
     {
+        printf("==========[ %5d ]==========\n", ii);
         for(auto& object : objects)
         {
             Event damage("take_damage");
             damage.SetValueInteger("damage", 20);
             
+            object->HandleEvent(startFrame);
             object->HandleEvent(damage);
-            object->HandleEvent(debug);
+            //object->HandleEvent(debug);
         }
     }
 

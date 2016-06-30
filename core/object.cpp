@@ -42,6 +42,19 @@ void Object::AddComponent(std::unique_ptr<Component>& component)
     components_.emplace_back(std::move(component));
 }
 
+void Object::RemoveComponent(uint32_t component_id)
+{
+    std::list<ComponentPtr>::iterator itr;
+    for(itr=components_.begin(); itr!=components_.end(); ++itr)
+    {
+        if((*itr)->GetId() == component_id)
+        {
+            components_.remove(*itr);
+            break;
+        }
+    }
+}
+
 uint32_t Object::GetId() const
 {
     return id_;

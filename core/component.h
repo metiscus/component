@@ -11,9 +11,11 @@ class Component
 private:
     uint32_t priority_;
     Object *parent_;
+    uint32_t id_;
 
     std::vector<Property> properties_;
 
+    static uint32_t GetNextId();
 public:
     Component(Object* parent, uint32_t priority);
     virtual ~Component() = default;
@@ -25,6 +27,8 @@ public:
     bool HasProperty(const std::string& name) const;
     
     const std::vector<Property>& GetProperties() const;
+    
+    uint32_t GetId() const;
 
 protected:
     Object* GetParent();

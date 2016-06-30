@@ -2,6 +2,8 @@ CXXFLAGS=-g -O0 -Wall -Wextra -std=c++11 -I. -MD
 
 CXXFLAGS+=-Iextern/rapidxml-1.13
 
+CXXFLAGS+=-fno-omit-frame-pointer -fsanitize=address
+
 SRC=\
 	main.cpp\
 	core/component.cpp\
@@ -11,6 +13,7 @@ SRC=\
 	components/dummy.cpp\
 	components/living.cpp\
 	components/damagereductioneffect.cpp\
+	components/healingeffect.cpp\
 
 OBJ=$(SRC:.cpp=.o)
 

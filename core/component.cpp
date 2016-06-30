@@ -7,9 +7,16 @@
 #include <cxxabi.h>
 #endif
 
+uint32_t Component::GetNextId()
+{
+    static uint32_t id = 1;
+    return ++id;
+}
+
 Component::Component(Object* parent,uint32_t priority)
     : priority_(priority)
     , parent_(parent)
+    , id_(GetNextId())
 {
     
 }
@@ -21,7 +28,9 @@ bool Component::HandleEvent(Event& event)
         
 #if CompilerGCC
         int status;
-        printf("[Component %s]\n", abi::__cxa_demangle(typeid(*this).name(),0,0,&status));
+        char *name = abi::__cxa_demangle(typeid(*this).name(),0,0,&status);
+        printf("[Component %s]\n", name);
+        free(name);
 #else
         printf("[Component %s]\n", typeid(*this).name());
 #endif        
@@ -113,4 +122,9 @@ Object* Component::GetParent()
 void Component::AddProperty(Property property)
 {
     properties_.emplace_back(property);
+}
+
+uint32_t Component::GetId() const
+{
+    return id_;
 }

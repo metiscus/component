@@ -24,11 +24,24 @@ bool LivingComponent::HandleEvent(Event& event)
         
         if(health_ <= 0)
         {
+            // Don't allow negative health
+            health_ = 0;
+
             Object* parent = GetParent();
             printf("[object: %u] i'm dead!\n", parent->GetId());
 
             Event evnt("event_died");
             parent->HandleEvent(evnt);
+        }
+    }
+    
+    if(event.GetName() == "heal_damage")
+    {
+        printf("Healing myself %d => %d!\n", health_, std::min(max_health_, health_ + event.GetValueAsInteger("quantity")));
+        health_ += event.GetValueAsInteger("quantity");
+        if(health_ > max_health_)
+        {
+            health_ = max_health_;
         }
     }
     return true;

@@ -20,4 +20,7 @@ public:
     
     void AddComponent(std::unique_ptr<Component>& component);
     uint32_t GetId() const;
+
+protected:
+    void RemoveComponent(uint32_t component_id);
 };
