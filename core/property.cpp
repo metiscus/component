@@ -16,6 +16,7 @@ const char* Property::GetTypeCString() const
         "String",
         "Integer",
         "Real",
+        "Boolean",
         nullptr
     };
     
