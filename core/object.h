@@ -17,6 +17,7 @@ private:
 public:
     Object(uint32_t id = GetNextId());
     bool HandleEvent(Event event);
+    bool HandleEvent(const std::string& name);
     
     void AddComponent(std::unique_ptr<Component>& component);
     uint32_t GetId() const;

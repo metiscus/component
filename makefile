@@ -10,6 +10,8 @@ SRC=\
 	core/event.cpp\
 	core/object.cpp\
 	core/property.cpp\
+	core/world.cpp\
+	core/system.cpp\
 	components/dummy.cpp\
 	components/living.cpp\
 	components/damagereductioneffect.cpp\

@@ -27,6 +27,11 @@ bool Object::HandleEvent(Event event)
     return true;
 }
 
+bool Object::HandleEvent(const std::string& name)
+{
+    return HandleEvent(Event(name));
+}
+
 void Object::AddComponent(std::unique_ptr<Component>& component)
 {
     std::list<ComponentPtr>::iterator itr;
