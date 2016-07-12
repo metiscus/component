@@ -7,8 +7,9 @@ uint32_t Object::GetNextId()
     return ++id;
 }
 
-Object::Object(uint32_t id)
+Object::Object(World* world, uint32_t id)
     : id_(id)
+    , world_(world)
 {
     
 }

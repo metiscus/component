@@ -4,6 +4,7 @@
 #include "event.h"
 
 class Component;
+class World;
 
 class Object
 {
@@ -13,9 +14,10 @@ private:
     std::list<ComponentPtr> components_;
     
     uint32_t id_;
+    World *world_;
 
 public:
-    Object(uint32_t id = GetNextId());
+    Object(World* world, uint32_t id = GetNextId());
     bool HandleEvent(Event event);
     bool HandleEvent(const std::string& name);
     

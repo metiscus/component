@@ -2,6 +2,7 @@
 
 #include "core/event.h"
 #include "core/object.h"
+#include "core/world.h"
 #include "components/living.h"
 #include "components/damagereductioneffect.h"
 #include "components/healingeffect.h"
@@ -11,10 +12,12 @@ int main(int argc, char** argv)
     typedef std::unique_ptr<Object> ObjectPtr;
     std::vector<ObjectPtr> objects;
     
+    World theWorld;
+    
     //create an object
     {
         ObjectPtr myObject;
-        myObject.reset(new Object());
+        myObject.reset(new Object(&theWorld));
 
         std::unique_ptr<Component> component;
         component.reset(new LivingComponent(myObject.get()));
@@ -40,7 +43,7 @@ int main(int argc, char** argv)
     //create an object 2
     {
         ObjectPtr myObject;
-        myObject.reset(new Object());
+        myObject.reset(new Object(&theWorld));
 
         std::unique_ptr<Component> component;
         component.reset(new LivingComponent(myObject.get()));
