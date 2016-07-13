@@ -23,6 +23,9 @@ public:
     
     void AddComponent(std::unique_ptr<Component>& component);
     uint32_t GetId() const;
+    
+    const World* GetWorld() const;
+    World* GetWorld();
 
 protected:
     void RemoveComponent(uint32_t component_id);

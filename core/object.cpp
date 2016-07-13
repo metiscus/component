@@ -48,6 +48,16 @@ void Object::AddComponent(std::unique_ptr<Component>& component)
     components_.emplace_back(std::move(component));
 }
 
+const World* Object::GetWorld() const
+{
+    return world_;
+}
+
+World* Object::GetWorld()
+{
+    return world_;
+}
+
 void Object::RemoveComponent(uint32_t component_id)
 {
     std::list<ComponentPtr>::iterator itr;
