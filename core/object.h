@@ -11,7 +11,7 @@ class Object
 private:
     static uint32_t GetNextId();
     typedef std::unique_ptr<Component> ComponentPtr;
-    std::list<ComponentPtr> components_;
+    std::vector<ComponentPtr> components_;
     
     uint32_t id_;
     World *world_;
@@ -22,6 +22,10 @@ public:
     bool HandleEvent(const std::string& name);
     
     void AddComponent(std::unique_ptr<Component>& component);
+    uint32_t GetComponentCount() const;
+    Component* GetComponent(uint32_t idx);
+    Component* GetComponentByType(uint32_t type);
+
     uint32_t GetId() const;
     
     const World* GetWorld() const;

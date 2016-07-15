@@ -19,7 +19,8 @@ private:
 public:
     Component(Object* parent, uint32_t priority);
     virtual ~Component() = default;
-    virtual bool HandleEvent(Event& event) = 0;
+    virtual bool HandleEvent(Event& event);
+    virtual uint32_t GetType() const = 0;
     const uint32_t& GetPriority() const;
 
     const Property* GetProperty(const std::string& name) const;

@@ -9,7 +9,7 @@ class Event;
 class World
 {
 public:
-    void AddSystem(std::unique_ptr<System>);
+    void AddSystem(std::shared_ptr<System> system);
 
     void AddObject(std::unique_ptr<Object>);
     void RemoveObject(uint32_t id);
@@ -18,7 +18,7 @@ public:
     bool HandleEvent(Event& event);
 
 private:
-    typedef std::unique_ptr<System> SystemPtr;
+    typedef std::shared_ptr<System> SystemPtr;
     std::map<System::Type, SystemPtr> systems_;
     
     typedef std::unique_ptr<Object> ObjectPtr;

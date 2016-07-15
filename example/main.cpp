@@ -6,6 +6,8 @@
 #include "components/living.h"
 #include "components/damagereductioneffect.h"
 #include "components/healingeffect.h"
+#include "rendersystem.h"
+#include "rendercomponent.h"
 
 int main(int argc, char** argv)
 {
@@ -13,6 +15,11 @@ int main(int argc, char** argv)
     std::vector<ObjectPtr> objects;
     
     World theWorld;
+    
+    std::shared_ptr<System> render;
+    render.reset(new RenderSystem());
+    
+    theWorld.AddSystem(render);
     
     //create an object
     {
@@ -36,6 +43,10 @@ int main(int argc, char** argv)
         component2->HandleEvent(buffness);
         
         myObject->AddComponent(component2);
+        
+        std::unique_ptr<Component> component3;
+        component3.reset(new RenderComponent(myObject.get()));
+        myObject->AddComponent(component3);
 
         objects.emplace_back(std::move(myObject));
     }

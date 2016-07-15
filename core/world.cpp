@@ -4,9 +4,9 @@
 #include "system.h"
 #include "component.h"
 
-void World::AddSystem(std::unique_ptr<System> system)
+void World::AddSystem(std::shared_ptr<System> system)
 {
-    systems_.emplace(std::make_pair(system->GetType(), std::move(system)));
+    systems_.insert(std::make_pair(system->GetType(), std::move(system)));
 }
 
 bool World::HandleEvent(Event& event)

@@ -1,0 +1,11 @@
+I envision the entity, component, system design as follows
+*Entity*
+- has an id, and a reference to the World in which it exists
+- contains Components and allows access to them
+
+*Componet*
+- has data
+
+*System*
+- operates on entities and their various components
+

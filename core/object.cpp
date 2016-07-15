@@ -16,7 +16,7 @@ Object::Object(World* world, uint32_t id)
 
 bool Object::HandleEvent(Event event)
 {
-    std::list<ComponentPtr>::iterator itr;
+    std::vector<ComponentPtr>::iterator itr;
     for(itr=components_.begin(); itr!=components_.end(); ++itr)
     {
         if(!(*itr)->HandleEvent(event)) 
@@ -35,7 +35,7 @@ bool Object::HandleEvent(const std::string& name)
 
 void Object::AddComponent(std::unique_ptr<Component>& component)
 {
-    std::list<ComponentPtr>::iterator itr;
+    std::vector<ComponentPtr>::iterator itr;
     for(itr=components_.begin(); itr!=components_.end(); ++itr)
     {
         if((*itr)->GetPriority() < component->GetPriority())
@@ -46,6 +46,31 @@ void Object::AddComponent(std::unique_ptr<Component>& component)
     }
     
     components_.emplace_back(std::move(component));
+}
+
+uint32_t Object::GetComponentCount() const
+{
+    return components_.size();
+}
+
+Component* Object::GetComponent(uint32_t idx)
+{
+    return components_.at(idx).get();
+}
+
+Component* Object::GetComponentByType(uint32_t type)
+{
+    Component* ptr = nullptr;
+    std::vector<ComponentPtr>::iterator itr;
+    for(itr=components_.begin(); itr!=components_.end(); ++itr)
+    {
+        if((*itr)->GetType() == type)
+        {
+            ptr = (*itr).get();
+            break;
+        }
+    }
+    return ptr;
 }
 
 const World* Object::GetWorld() const
@@ -60,12 +85,12 @@ World* Object::GetWorld()
 
 void Object::RemoveComponent(uint32_t component_id)
 {
-    std::list<ComponentPtr>::iterator itr;
+    std::vector<ComponentPtr>::iterator itr;
     for(itr=components_.begin(); itr!=components_.end(); ++itr)
     {
         if((*itr)->GetId() == component_id)
         {
-            components_.remove(*itr);
+            components_.erase(itr);
             break;
         }
     }

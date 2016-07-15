@@ -12,4 +12,5 @@ public:
     HealingEffect(Object* parent);
     
     virtual bool HandleEvent(Event& event);
+    virtual uint32_t GetType() const { return 0x1003; }
 };
