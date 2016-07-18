@@ -2,3 +2,6 @@
 *.d
 game
 *.gch
+*.a
+*.so
+*.dll
