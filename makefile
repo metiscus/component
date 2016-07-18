@@ -10,6 +10,7 @@ LIB_CORE_SRC=\
 	core/component.cpp\
 	core/event.cpp\
 	core/object.cpp\
+	core/port.cpp\
 	core/property.cpp\
 	core/world.cpp\
 	core/system.cpp\
@@ -17,6 +18,17 @@ LIB_CORE_SRC=\
 	components/living.cpp\
 	components/damagereductioneffect.cpp\
 	components/healingeffect.cpp\
+	render/camera.cpp\
+	render/image.cpp\
+	render/node.cpp\
+	render/rectangle.cpp\
+	render/texture.cpp\
+	render/vector2.cpp\
+	render/font.cpp\
+	render/matrix3.cpp\
+	render/sprite.cpp\
+	render/transform.cpp\
+	render/window.cpp\
 
 LIB_CORE_OBJ=$(LIB_CORE_SRC:.cpp=.o)
 
@@ -33,8 +45,8 @@ libglad.a: $(LIB_GLAD_OBJ)
 GAME_SRC=\
 	example/main.cpp\
 	example/rendersystem.cpp\
-	example/render/window.cpp\
-	example/rendercomponent.cpp
+	example/rendercomponent.cpp\
+	example/inputsystem.cpp
 
 SDL_INCLUDE := `pkg-config sdl2 --cflags`
 CXXFLAGS += $(SDL_INCLUDE)

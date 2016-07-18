@@ -11,7 +11,7 @@ RenderSystem::RenderSystem()
 
 RenderSystem::~RenderSystem()
 {
-    
+    window_.release();
 }
 
 void RenderSystem::ObjectAdded(Object* obj)
@@ -26,5 +26,14 @@ void RenderSystem::ObjectRemoved(Object* obj)
 
 void RenderSystem::Draw()
 {
+    window_->MakeCurrent();
+    
+    window_->SwapBuffers();
+}
+
+
+void RenderSystem::Update(uint32_t frame, float dt)
+{
+    Draw();
     
 }

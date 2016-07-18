@@ -21,6 +21,11 @@ void System::ObjectRemoved(Object* obj)
     // ignore
 }
 
+void System::Update(uint32_t frame, float dt)
+{
+    // ignore
+}
+
 uint32_t System::GetType() const
 {
     return type_;

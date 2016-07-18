@@ -24,7 +24,7 @@ Window::Window(const std::string& title, uint32_t width, uint32_t height)
     
     if(title.length() == 0)
     {
-        title_ = "SDL Demo";
+        title_ = "Window";
     }
     
     window_ = SDL_CreateWindow(

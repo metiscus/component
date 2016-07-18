@@ -16,6 +16,8 @@ public:
     
     uint32_t GetType() const;
     
+    virtual void Update(uint32_t frame, float dt);
+    
 private:
     const Type type_;
 };

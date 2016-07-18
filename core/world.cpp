@@ -23,6 +23,15 @@ bool World::HandleEvent(Event& event)
     return true;
 }
 
+void World::Update(uint32_t frame, float dt)
+{
+    std::map<System::Type, SystemPtr>::iterator system = systems_.begin();
+    for( ; system!=systems_.end(); ++system)
+    {
+        system->second->Update(frame, dt);
+    }
+}
+
 void World::AddObject(std::unique_ptr<Object> object)
 {
     auto itr = objects_.find(object->GetId());

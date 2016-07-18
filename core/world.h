@@ -16,6 +16,8 @@ public:
     Object* GetObjectById(uint32_t id);
 
     bool HandleEvent(Event& event);
+    
+    void Update(uint32_t frame, float dt);
 
 private:
     typedef std::shared_ptr<System> SystemPtr;

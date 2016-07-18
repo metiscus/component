@@ -7,6 +7,7 @@
 #include "components/damagereductioneffect.h"
 #include "components/healingeffect.h"
 #include "rendersystem.h"
+#include "inputsystem.h"
 #include "rendercomponent.h"
 
 int main(int argc, char** argv)
@@ -20,6 +21,11 @@ int main(int argc, char** argv)
     render.reset(new RenderSystem());
     
     theWorld.AddSystem(render);
+    
+    std::shared_ptr<System> input;
+    input.reset(new InputSystem());
+    
+    theWorld.AddSystem(input);
     
     //create an object
     {
@@ -87,7 +93,7 @@ int main(int argc, char** argv)
 
     Event startFrame("event_start_frame");
     
-    for(uint32_t ii=0; ii<20; ++ii)
+    for(uint32_t ii=0; ii<2000; ++ii)
     {
         printf("==========[ %5d ]==========\n", ii);
         for(auto& object : objects)
@@ -99,6 +105,8 @@ int main(int argc, char** argv)
             object->HandleEvent(damage);
             //object->HandleEvent(debug);
         }
+        
+        theWorld.Update(ii, 1.0/60.0);
     }
 
     return 0;
