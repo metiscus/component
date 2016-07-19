@@ -2,10 +2,12 @@
 #include "render/window.h"
 #include "core/object.h"
 #include "core/component.h"
+#include "core/log.h"
 
 RenderSystem::RenderSystem()
     : System(RenderSystem::Id)
 {
+    log_info("RenderSystem::RenderSystem()");
     window_.reset(new Window("Example Game", 640, 480));
 }
 
@@ -35,5 +37,9 @@ void RenderSystem::Draw()
 void RenderSystem::Update(uint32_t frame, float dt)
 {
     Draw();
+}
+
+void RenderSystem::LoadDataFile(const std::string& filename)
+{
     
 }

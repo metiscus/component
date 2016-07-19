@@ -1,4 +1,5 @@
 #include "core/global.h"
+#include "core/log.h"
 #include "inputsystem.h"
 
 #include <SDL.h>
@@ -7,6 +8,7 @@
 InputSystem::InputSystem()
     : System(InputSystem::Id)
 {
+    log_info("InputSystem::InputSystem()");
 }
 
 InputSystem::~InputSystem()

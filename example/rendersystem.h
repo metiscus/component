@@ -20,6 +20,8 @@ public:
     
     virtual void Update(uint32_t frame, float dt);
 
+    void LoadDataFile(const std::string& filename);
+
 private:
     std::unique_ptr<Window> window_;
     std::list<RenderComponent*> components_;
