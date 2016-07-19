@@ -1,5 +1,6 @@
 #include "core/global.h"
 #include "core/system.h"
+#include "render/texture.h"
 
 
 class Window;
@@ -25,4 +26,5 @@ public:
 private:
     std::unique_ptr<Window> window_;
     std::list<RenderComponent*> components_;
+    std::map<std::string, TexturePtr> textures_;
 };

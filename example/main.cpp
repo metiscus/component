@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     
     World theWorld;
     
-    std::shared_ptr<System> render;
+    std::shared_ptr<RenderSystem> render;
     render.reset(new RenderSystem());
     
     theWorld.AddSystem(render);
@@ -25,8 +25,11 @@ int main(int argc, char** argv)
     std::shared_ptr<System> input;
     input.reset(new InputSystem());
     
-    theWorld.AddSystem(input);
+    theWorld.AddSystem(std::static_pointer_cast<System>(input));
     
+    
+    render->LoadDataFile("data/data.txt");
+
     //create an object
     {
         ObjectPtr myObject;

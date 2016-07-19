@@ -1,5 +1,6 @@
 #include "rendersystem.h"
 #include "render/window.h"
+#include "render/image.h"
 #include "core/object.h"
 #include "core/component.h"
 #include "core/log.h"
@@ -41,5 +42,15 @@ void RenderSystem::Update(uint32_t frame, float dt)
 
 void RenderSystem::LoadDataFile(const std::string& filename)
 {
-    
+    Image img;
+    if(!img.LoadFile("data/sprites/man0.png"))
+    {
+        log_warn("Unable to load an example texture.");
+    }
+    else
+    {
+        TexturePtr texPtr;
+        texPtr.reset(new Texture(img));
+        log_info("Loaded some demo texture.");
+    }
 }
